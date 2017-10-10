@@ -31,11 +31,9 @@ class GalleryViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        _ = PXRequest.init(forSearchTerm: "street",
-                           searchTag: "urban",
-                           searchGeo: "",
-                           page: 1,
-                           resultsPerPage: 60,
+        self.title = "Roses Gallery"
+        _ = PXRequest.init(forSearchTerm: "rose", searchTag: "flower", searchGeo: "",
+                           page: 1, resultsPerPage: 60,
                            photoSizes: PXPhotoModelSize.large,
                            except: PXPhotoModelCategory.PXPhotoModelCategoryUncategorized,
                            completion: { (dict: Dictionary?, err: Error?) in
