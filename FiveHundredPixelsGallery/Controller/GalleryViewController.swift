@@ -26,6 +26,10 @@ class GalleryViewController: UIViewController {
     @IBOutlet weak var mainLoadingView: UIView!
     @IBOutlet weak var galleryInfoIndicator: UIActivityIndicatorView!
     
+    static let viewIdentifier = "GalleryViewController"
+    
+    var searchQuery: String!
+    
     fileprivate let itemsPerRow = 2
     fileprivate let sectionInsets = UIEdgeInsetsMake(30, 20, 50, 20)
     fileprivate var photosJSON: [Any]?
@@ -35,11 +39,13 @@ class GalleryViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.title = "Roses Gallery"
+        self.title = "\(self.searchQuery!) Gallery"
         galleryInfoIndicator.transform = CGAffineTransform(scaleX: 1.5, y: 1.5)
         galleryInfoIndicator.startAnimating()
         
-        _ = PXRequest.init(forSearchTerm: "rose", searchTag: "flower", searchGeo: "",
+        let encodeQuery = self.searchQuery.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)
+        print("My Search Query \(encodeQuery ?? "")")
+        _ = PXRequest.init(forSearchTerm: encodeQuery, searchTag: "", searchGeo: "",
                            page: 1, resultsPerPage: 60,
                            photoSizes: PXPhotoModelSize.large,
                            except: PXPhotoModelCategory.PXPhotoModelCategoryUncategorized,
@@ -141,6 +147,7 @@ extension GalleryViewController: UICollectionViewDataSource {
             }
             if let url = URL(string: imageResource.imageURL) {
                 let data = try? Data(contentsOf: url)
+
                 DispatchQueue.main.async {
                     cell.imageLoadingIndicator.stopAnimating()
                     cell.imageLoadingIndicator.isHidden = true
