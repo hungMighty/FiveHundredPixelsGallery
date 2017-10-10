@@ -21,9 +21,11 @@ struct ImageObj {
 class GalleryViewController: UIViewController {
     
     @IBOutlet weak var collectionView: UICollectionView!
+    @IBOutlet weak var mainLoadingView: UIView!
+    @IBOutlet weak var galleryInfoIndicator: UIActivityIndicatorView!
     
     fileprivate let itemsPerRow = 2
-    fileprivate let sectionInsets = UIEdgeInsetsMake(50, 20, 50, 20)
+    fileprivate let sectionInsets = UIEdgeInsetsMake(30, 20, 50, 20)
     fileprivate var photosJSON: [Any]?
     fileprivate var photoResources = [ImageObj]()
     
@@ -32,6 +34,9 @@ class GalleryViewController: UIViewController {
         super.viewDidLoad()
         
         self.title = "Roses Gallery"
+        galleryInfoIndicator.transform = CGAffineTransform(scaleX: 1.5, y: 1.5)
+        galleryInfoIndicator.startAnimating()
+        
         _ = PXRequest.init(forSearchTerm: "rose", searchTag: "flower", searchGeo: "",
                            page: 1, resultsPerPage: 60,
                            photoSizes: PXPhotoModelSize.large,
@@ -43,6 +48,10 @@ class GalleryViewController: UIViewController {
                                 self.showAlertMess()
                             }
         })
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
     }
 
     override func didReceiveMemoryWarning() {
@@ -71,6 +80,8 @@ class GalleryViewController: UIViewController {
                 }
                 
                 DispatchQueue.main.async {
+                    self.mainLoadingView.isHidden = true
+                    self.galleryInfoIndicator.stopAnimating()
                     self.collectionView.reloadData()
                 }
             }
@@ -123,9 +134,14 @@ extension GalleryViewController: UICollectionViewDataSource {
         let imageResource = photoResources[indexPath.row]
         
         DispatchQueue.global(qos: .background).async {
+            DispatchQueue.main.async {
+                cell.imageLoadingIndicator.startAnimating()
+            }
             if let url = URL(string: imageResource.imageURL) {
                 let data = try? Data(contentsOf: url)
                 DispatchQueue.main.async {
+                    cell.imageLoadingIndicator.stopAnimating()
+                    cell.imageLoadingIndicator.isHidden = true
                     cell.imageItem.image = UIImage(data: data!)
                 }
             }
@@ -139,7 +155,17 @@ extension GalleryViewController: UICollectionViewDataSource {
 extension GalleryViewController: UICollectionViewDelegate {
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        
+        let cell = collectionView.cellForItem(at: indexPath) as! ImageCell
+        if cell.imageItem.image != nil {
+            if let view = self.storyboard?.instantiateViewController(withIdentifier: DetailImageViewController.viewIdentifier) as? DetailImageViewController {
+                view.imageToDisplay = cell.imageItem.image
+                let imageName = photoResources[indexPath.row].imageName
+                if !imageName.isEmpty {
+                    view.imageTitle = imageName
+                }
+                self.navigationController?.pushViewController(view, animated: true)
+            }
+        }
     }
     
 }

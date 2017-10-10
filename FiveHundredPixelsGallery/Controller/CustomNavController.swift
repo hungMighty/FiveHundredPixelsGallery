@@ -14,6 +14,7 @@ class CustomNavController: UINavigationController, UINavigationControllerDelegat
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        self.delegate = self
         self.navigationBar.barTintColor = UIColor.red
         self.navigationBar.tintColor = UIColor.white
         self.navigationBar.titleTextAttributes = [NSAttributedStringKey.foregroundColor: UIColor.white];

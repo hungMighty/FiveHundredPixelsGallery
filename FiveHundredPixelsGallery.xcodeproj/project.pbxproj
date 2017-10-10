@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		A08618891F8D320200949180 /* CustomNavController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A08618881F8D320200949180 /* CustomNavController.swift */; };
+		A086188B1F8D379F00949180 /* DetailImageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A086188A1F8D379F00949180 /* DetailImageViewController.swift */; };
 		A0E61CAF1F8D099F00FBF8AD /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0E61CAE1F8D099F00FBF8AD /* AppDelegate.swift */; };
 		A0E61CB11F8D099F00FBF8AD /* GalleryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0E61CB01F8D099F00FBF8AD /* GalleryViewController.swift */; };
 		A0E61CB41F8D099F00FBF8AD /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A0E61CB21F8D099F00FBF8AD /* Main.storyboard */; };
@@ -24,6 +25,7 @@
 
 /* Begin PBXFileReference section */
 		A08618881F8D320200949180 /* CustomNavController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomNavController.swift; sourceTree = "<group>"; };
+		A086188A1F8D379F00949180 /* DetailImageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailImageViewController.swift; sourceTree = "<group>"; };
 		A0E61CAB1F8D099F00FBF8AD /* FiveHundredPixelsGallery.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FiveHundredPixelsGallery.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A0E61CAE1F8D099F00FBF8AD /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		A0E61CB01F8D099F00FBF8AD /* GalleryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GalleryViewController.swift; sourceTree = "<group>"; };
@@ -107,8 +109,9 @@
 		A0E61CC11F8D09E000FBF8AD /* Controller */ = {
 			isa = PBXGroup;
 			children = (
-				A0E61CB01F8D099F00FBF8AD /* GalleryViewController.swift */,
 				A08618881F8D320200949180 /* CustomNavController.swift */,
+				A0E61CB01F8D099F00FBF8AD /* GalleryViewController.swift */,
+				A086188A1F8D379F00949180 /* DetailImageViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -238,6 +241,7 @@
 				A0E61CAF1F8D099F00FBF8AD /* AppDelegate.swift in Sources */,
 				A0E61CEE1F8D0C7100FBF8AD /* PXAPIHelper.m in Sources */,
 				A0E61CEB1F8D0C6400FBF8AD /* NSData+Base64.m in Sources */,
+				A086188B1F8D379F00949180 /* DetailImageViewController.swift in Sources */,
 				A08618891F8D320200949180 /* CustomNavController.swift in Sources */,
 				A0E61CF01F8D0C7100FBF8AD /* PXRequest.m in Sources */,
 			);

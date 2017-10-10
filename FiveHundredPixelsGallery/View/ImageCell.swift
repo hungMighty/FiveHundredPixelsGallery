@@ -12,6 +12,7 @@ import UIKit
 class ImageCell: UICollectionViewCell {
     
     @IBOutlet weak var imageItem: UIImageView!
+    @IBOutlet weak var imageLoadingIndicator: UIActivityIndicatorView!
     
     static func cellIdentifier() -> String {
         return "ImageCell"
