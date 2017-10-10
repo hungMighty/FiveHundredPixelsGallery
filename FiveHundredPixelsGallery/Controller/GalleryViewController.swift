@@ -20,6 +20,8 @@ struct ImageObj {
 
 class GalleryViewController: UIViewController {
     
+    // Searching using API: https://api.500px.com/v1/photos/search
+    
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var mainLoadingView: UIView!
     @IBOutlet weak var galleryInfoIndicator: UIActivityIndicatorView!
